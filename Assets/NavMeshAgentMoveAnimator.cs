@@ -12,6 +12,8 @@ public class NavMeshAgentMoveAnimator : MonoBehaviour
 	[SerializeField] private List<Animator> _starboardThrusterAnimators;
 	[SerializeField] private List<Animator> _portRotationThrusters;
 	[SerializeField] private List<Animator> _starboardRotationThrusters;
+	[SerializeField] private List<Animator> _aftEngines;
+	[SerializeField] private List<Animator> _forwardEngines;
 
 	private Vector2 _previousPosition;
 	private Quaternion _previousRotation;
@@ -58,7 +60,11 @@ public class NavMeshAgentMoveAnimator : MonoBehaviour
 		//Debug.Log("DeltaX: " + direction.x);
 		SetFloatOnAnimatorList(_portThrusterAnimators, "deltaX", direction.x);
 
-		SetFloatOnAnimatorList(_starboardThrusterAnimators, "deltaX", -direction.x);	
+		SetFloatOnAnimatorList(_starboardThrusterAnimators, "deltaX", -direction.x);
+
+		SetFloatOnAnimatorList(_aftEngines, "deltaY", direction.y);
+
+		SetFloatOnAnimatorList(_forwardEngines, "deltaY", -direction.y);
 
 
 		Vector3 previousRotationEuler = _previousRotation.eulerAngles;
@@ -115,5 +121,7 @@ public class NavMeshAgentMoveAnimator : MonoBehaviour
 		SetBoolOnAnimatorList(_starboardRotationThrusters, "isStopped", isStopped);
 		SetBoolOnAnimatorList(_portRotationThrusters, "isStopped", isStopped);
 		SetBoolOnAnimatorList(_starboardRotationThrusters, "isStopped", isStopped);
+		SetBoolOnAnimatorList(_aftEngines, "isStopped", isStopped);
+		SetBoolOnAnimatorList(_forwardEngines, "isStopped", isStopped);
 	}
 }
