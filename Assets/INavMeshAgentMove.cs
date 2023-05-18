@@ -2,10 +2,13 @@
 
 public interface INavMeshAgentMove
 {
-    float Speed { get; }
-    float RotationSpeed { get;}
+    float MaxSpeed { get; }
+    Vector3 CurrentVelocity { get; }
+    float MaxRotationSpeed { get;}
+    
     Vector2 Position { get; }
     Quaternion Rotation { get; }
+    bool IsStopped { get; }
     bool CanRotate { get; }
     float DistanceToDestinationThreshold { get; }
 }

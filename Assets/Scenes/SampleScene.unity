@@ -648,8 +648,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: _rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _distanceToDestinationThreshold
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5303552269489785821, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Name
@@ -657,11 +661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_AutoBraking
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_StoppingDistance
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}

@@ -19,10 +19,11 @@ public class Player : MonoBehaviour, INavMeshAgentMove
     private NavMeshMovement _movement;
     private Vector2 _inputVector;
     private bool _canRotate = false;
+    private bool _isStopped = false;
 
-	public float Speed => _speed;
+	public float MaxSpeed => _speed;
 
-	public float RotationSpeed => _rotationSpeed;	
+	public float MaxRotationSpeed => _rotationSpeed;	
 
 	Vector2 INavMeshAgentMove.Position => this.transform.position;
 
@@ -31,6 +32,10 @@ public class Player : MonoBehaviour, INavMeshAgentMove
 	public bool CanRotate { get => _canRotate; }
 
 	public float DistanceToDestinationThreshold => _distanceToDestinationThreshold;
+
+	public Vector3 CurrentVelocity => _navMeshAgent.velocity;
+
+	public bool IsStopped => _isStopped;
 
 	// Start is called before the first frame update
 	void Start()
@@ -55,9 +60,10 @@ public class Player : MonoBehaviour, INavMeshAgentMove
        
         Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
 
-        _navMeshAgent.isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
-		_navMeshAgent.speed = Speed;
-		_navMeshAgent.angularSpeed = RotationSpeed;
+        _isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
+        _navMeshAgent.isStopped = IsStopped;
+		_navMeshAgent.speed = MaxSpeed;
+		_navMeshAgent.angularSpeed = MaxRotationSpeed;
 		_navMeshAgent.SetDestination(nextPosition);
 		_rigidBody2D.SetRotation(_movement.CalculateRotation(Time.fixedDeltaTime));
 	}
