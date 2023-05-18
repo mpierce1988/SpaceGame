@@ -26,27 +26,27 @@ public class PlayerGameplayInput : IGameplayInput
 		_gameplayInputActions.Gameplay.Secondary.performed += Secondary_performed;
 	}
 
-	private void Secondary_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	private void Secondary_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
 	{
-		if (obj.canceled)
+		if (context.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
 		{
-			OnSecondaryChange?.Invoke(false);
+			OnSecondaryChange?.Invoke(true);
 		} 
 		else
 		{
-			OnSecondaryChange?.Invoke(true);
+			OnSecondaryChange?.Invoke(false);
 		}
 	}
 
-	private void Primary_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	private void Primary_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
 	{
-		if (obj.canceled)
+		if (context.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
 		{
-			OnPrimaryChange?.Invoke(false);
+			OnPrimaryChange?.Invoke(true);
 		} 
 		else
 		{
-			OnPrimaryChange?.Invoke(true);
+			OnPrimaryChange?.Invoke(false);
 		}
 	}
 
