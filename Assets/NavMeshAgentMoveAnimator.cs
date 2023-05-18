@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class NavMeshAgentMoveAnimator : MonoBehaviour
 {
-    [SerializeField] private INavMeshAgentMove _navMeshAgentMove;
+    [SerializeField] private NavEntity _navMeshAgentMove;
     private Animator _animator;
 
 	private Vector2 _previousPosition;
@@ -20,15 +20,34 @@ public class NavMeshAgentMoveAnimator : MonoBehaviour
         }
 	}
 
+	private void Start()
+	{
+		_previousPosition = _navMeshAgentMove.Position;
+	}
+
 	private void FixedUpdate()
 	{
+		// calculate the current Velocity based on the current and previousr position
+		/// text
+		/// text
+		/// lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+		/// sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+		
+		float fixedDeltaTime = Time.fixedDeltaTime;
+		Vector2 currentVelocity = _navMeshAgentMove.CurrentVelocity;
+		Debug.Log("Current Velocity: " + currentVelocity);	
 		// calculate float of the current speed compared to the max speed
-		float speed = Mathf.Clamp01(_navMeshAgentMove.CurrentVelocity.magnitude / _navMeshAgentMove.MaxSpeed);
+		float speed = Mathf.Clamp01(currentVelocity.magnitude / _navMeshAgentMove.MaxSpeed);
 
 		_animator.SetFloat("speed", speed);		
 
 		// calculate the normalized direction of the deltaPosition and set a float for the deltaX and deltaY in the animator
 		Vector2 direction = (_navMeshAgentMove.Position - _previousPosition).normalized;
+
+		// calculate the deltaX and the deltaY relatitive to the rotation of the agent
+		direction = Quaternion.Inverse(_navMeshAgentMove.Rotation) * direction;
+
+
 		_animator.SetFloat("deltaX", direction.x);
 		_animator.SetFloat("deltaY", direction.y);
 
