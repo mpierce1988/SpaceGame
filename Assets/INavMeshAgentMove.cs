@@ -6,4 +6,6 @@ public interface INavMeshAgentMove
     float RotationSpeed { get;}
     Vector2 Position { get; }
     Quaternion Rotation { get; }
+    bool CanRotate { get; }
+    float DistanceToDestinationThreshold { get; }
 }

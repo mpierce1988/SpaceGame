@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, INavMeshAgentMove
     private Rigidbody2D _rigidBody2D;
     private NavMeshMovement _movement;
     private Vector2 _inputVector;
+    private bool _canRotate = false;
 
 	public float Speed => _speed;
 
@@ -26,6 +27,10 @@ public class Player : MonoBehaviour, INavMeshAgentMove
 	Vector2 INavMeshAgentMove.Position => this.transform.position;
 
 	public Quaternion Rotation => this.transform.rotation;
+
+	public bool CanRotate { get => _canRotate; }
+
+	public float DistanceToDestinationThreshold => _distanceToDestinationThreshold;
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,21 +52,14 @@ public class Player : MonoBehaviour, INavMeshAgentMove
     void FixedUpdate()
     {
         _navMeshAgent.speed = _speed;
-        if(_inputVector.magnitude > 0.25f)
-        {
-            Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
-            if((nextPosition - (Vector2)transform.position).magnitude > _distanceToDestinationThreshold)
-            {
-                _navMeshAgent.isStopped = false;
-				_navMeshAgent.SetDestination(nextPosition);
-			}
-            else
-            {
-                _navMeshAgent.isStopped = true;
-            }
-			
-		}		
-		_rigidBody2D.SetRotation(_movement.CalculateRotation(_inputVector, Time.deltaTime));
+       
+        Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
+
+        _navMeshAgent.isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
+		_navMeshAgent.speed = Speed;
+		_navMeshAgent.angularSpeed = RotationSpeed;
+		_navMeshAgent.SetDestination(nextPosition);
+		_rigidBody2D.SetRotation(_movement.CalculateRotation(Time.fixedDeltaTime));
 	}
 
 	void OnDestroy()
@@ -73,11 +71,11 @@ public class Player : MonoBehaviour, INavMeshAgentMove
 	{
         if (isActive)
         {
-            _movement.EnableRotation();
+            _canRotate = true;
         }
         else
         {
-            _movement.DisableRotation();
+            _canRotate = false;
         }
 	}	
 

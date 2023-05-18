@@ -4,8 +4,10 @@ using UnityEngine.AI;
 public class NavMeshMovement
 {
     private INavMeshAgentMove _move;
-    private Vector2 _destination;
-    private bool _rotate = false;
+    private Vector2 _nextPosition;  
+    private bool _isStopped = false;
+
+    public bool IsStopped => _isStopped;
 
 	public NavMeshMovement(INavMeshAgentMove move)
     {
@@ -13,22 +15,38 @@ public class NavMeshMovement
 	}
 
     public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
-    {
-        if(input.magnitude > 0.1f)
-        {
-            _destination = _move.Position + new Vector2(input.x, input.y) * _move.Speed * deltaTime;
-            NavMesh.SamplePosition(_destination, out NavMeshHit hit, _move.Speed * deltaTime, NavMesh.AllAreas);
-            return hit.position;            
-        }
+	{
+		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.Speed * deltaTime;
+		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.Speed * deltaTime, NavMesh.AllAreas);
 
-        return _destination;
-    }
+		// check if position is within distance threshold
+		if (!IsTargetDestinationCloseEnoughToStop(hit.position))
+		{
+			// Keep moving
+			_isStopped = false;
+			_nextPosition = hit.position;
+			return hit.position;
+		}
+		else
+		{
+			// stop
+			_isStopped = true;
+			_nextPosition = _move.Position;
+		}
 
-    public Quaternion CalculateRotation(Vector2 input, float deltaTime)
+		return _nextPosition;
+	}
+
+	public bool IsTargetDestinationCloseEnoughToStop(Vector2 targetDestionation)
+	{
+		return Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;
+	}
+
+	public Quaternion CalculateRotation(float deltaTime)
     {
-        if (_rotate)
+        if (_move.CanRotate)
         {
-			Vector2 direction = _destination - _move.Position;
+			Vector2 direction = _nextPosition - _move.Position;
 			if (direction.magnitude > 0.1f)
 			{
 				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
@@ -39,14 +57,5 @@ public class NavMeshMovement
 
         return _move.Rotation;
 	}
-
-    public void EnableRotation()
-    {
-        _rotate = true;
-    }
-
-    public void DisableRotation()
-    {
-        _rotate = false;
-    }
+   
 }
