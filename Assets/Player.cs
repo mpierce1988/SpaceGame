@@ -65,11 +65,14 @@ public class Player : NavEntity
         Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
 
         _isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
-        _navMeshAgent.isStopped = IsStopped;
+        _navMeshAgent.isStopped = IsStopped;        
 		_navMeshAgent.speed = MaxSpeed;
 		_navMeshAgent.angularSpeed = MaxRotationSpeed;
 		_navMeshAgent.SetDestination(nextPosition);
-		_rigidBody2D.SetRotation(_movement.CalculateRotation(Time.fixedDeltaTime));
+		if (!_navMeshAgent.isStopped)
+		{
+            _rigidBody2D.SetRotation(_movement.CalculateRotation(Time.fixedDeltaTime));
+        }
 
         // update position and rotation and velocity
         _position = transform.position;
