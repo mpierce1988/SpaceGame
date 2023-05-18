@@ -41,6 +41,8 @@ public class Player : NavEntity
 
 	public override float DistanceToDestinationThreshold => _distanceToDestinationThreshold;
 
+	public override Vector2 InputVector => _inputVector;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -105,16 +107,4 @@ public class Player : NavEntity
 	{
         _inputVector = inputVector;        
 	}
-}
-
-public abstract class NavEntity : MonoBehaviour, INavMeshAgentMove
-{
-	public abstract float MaxSpeed { get; }
-	public abstract Vector3 CurrentVelocity { get; }
-	public abstract float MaxRotationSpeed { get; }
-	public abstract Vector2 Position { get; }
-	public abstract Quaternion Rotation { get; }
-	public abstract bool IsStopped { get; }
-	public abstract bool CanRotate { get; }
-	public abstract float DistanceToDestinationThreshold { get; }
 }
