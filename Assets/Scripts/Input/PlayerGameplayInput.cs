@@ -21,32 +21,58 @@ public class PlayerGameplayInput : IGameplayInput
 		_gameplayInputActions.Enable();
 
 		_gameplayInputActions.Gameplay.Movement.performed += Movement_performed;
+		_gameplayInputActions.Gameplay.Movement.canceled += Movement_performed;
+
 		_gameplayInputActions.Gameplay.Look.performed += Look_performed;
+		_gameplayInputActions.Gameplay.Look.canceled += Look_performed;
+
 		_gameplayInputActions.Gameplay.Primary.performed += Primary_performed;
+		_gameplayInputActions.Gameplay.Primary.canceled += Primary_performed;
+
 		_gameplayInputActions.Gameplay.Secondary.performed += Secondary_performed;
+		_gameplayInputActions.Gameplay.Secondary.canceled += Secondary_performed;
 	}
 
-	private void Secondary_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	~PlayerGameplayInput()
 	{
-		if (obj.canceled)
+		// unregister from all events
+		_gameplayInputActions.Gameplay.Movement.performed -= Movement_performed;
+		_gameplayInputActions.Gameplay.Movement.canceled -= Movement_performed;
+
+		_gameplayInputActions.Gameplay.Look.performed -= Look_performed;
+		_gameplayInputActions.Gameplay.Look.canceled -= Look_performed;
+
+		_gameplayInputActions.Gameplay.Primary.performed -= Primary_performed;
+		_gameplayInputActions.Gameplay.Primary.canceled -= Primary_performed;
+
+		_gameplayInputActions.Gameplay.Secondary.performed -= Secondary_performed;
+		_gameplayInputActions.Gameplay.Secondary.canceled -= Secondary_performed;
+
+		_gameplayInputActions.Disable();
+	}
+
+	private void Secondary_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+	{
+		if (context.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
 		{
-			OnSecondaryChange?.Invoke(false);
+			OnSecondaryChange?.Invoke(true);
 		} 
 		else
 		{
-			OnSecondaryChange?.Invoke(true);
+			OnSecondaryChange?.Invoke(false);
 		}
 	}
 
-	private void Primary_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	private void Primary_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
 	{
-		if (obj.canceled)
+		Debug.Log("Primary Action received by PlayerGameplayInput");
+		if (context.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
 		{
-			OnPrimaryChange?.Invoke(false);
+			OnPrimaryChange?.Invoke(true);
 		} 
 		else
 		{
-			OnPrimaryChange?.Invoke(true);
+			OnPrimaryChange?.Invoke(false);
 		}
 	}
 

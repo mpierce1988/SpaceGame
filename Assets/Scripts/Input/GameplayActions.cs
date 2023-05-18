@@ -31,7 +31,7 @@ namespace SpaceGame.Input
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""84a535b2-ce6d-46d4-b2e7-b7de82a813af"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -70,7 +70,7 @@ namespace SpaceGame.Input
                 {
                     ""name"": ""WASD Movement"",
                     ""id"": ""3a10dfed-d83b-4a69-af02-db15c4d88002"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
