@@ -58,19 +58,34 @@ public class NavMeshAgentMoveAnimator : MonoBehaviour
 		//Debug.Log("DeltaX: " + direction.x);
 		SetFloatOnAnimatorList(_portThrusterAnimators, "deltaX", direction.x);
 
-		SetFloatOnAnimatorList(_starboardThrusterAnimators, "deltaX", -direction.x);
-
-		// set a bool is the agent is stopped
+		SetFloatOnAnimatorList(_starboardThrusterAnimators, "deltaX", -direction.x);	
 
 
-		// calculate the rotation as a float between the previous position and the current position and the max rotation speed
-		float deltaZ = Quaternion.Angle(_navMeshAgentMove.Rotation, _previousRotation);		
+		Vector3 previousRotationEuler = _previousRotation.eulerAngles;
+		Vector3 currentRotationEuler = _navMeshAgentMove.Rotation.eulerAngles;		
+
+
+		float deltaZ = Mathf.DeltaAngle(previousRotationEuler.z, currentRotationEuler.z) / Time.fixedDeltaTime;
 		//float normalizedDeltaZ = deltaZ / Time.fixedDeltaTime;
-		float scaledDeltaZ = deltaZ / (_navMeshAgentMove.MaxRotationSpeed * Time.fixedDeltaTime);
-		float rotation = Mathf.Clamp01(scaledDeltaZ);
-		Debug.Log("DeltaZ: " + deltaZ + ", ScaledDeltaZ: " + scaledDeltaZ);
-		SetFloatOnAnimatorList(_portRotationThrusters, "deltaX", rotation);
-		SetFloatOnAnimatorList(_starboardRotationThrusters, "deltaX", -rotation);
+
+		// normalize the deltaZ to a scale of -1 to 1, based on the maximum rotation speed
+		// division by 180 is necessary to convert from degrees to a scale of -1 to 1
+		float rotation = Mathf.Clamp(deltaZ / (_navMeshAgentMove.MaxRotationSpeed), -1.0f, 1.0f);
+		if(Mathf.Abs(rotation) > 0.1f)
+		{
+			Debug.Log("DeltaZ: " + deltaZ + ", ScaledDeltaZ: " + rotation);
+			SetFloatOnAnimatorList(_portRotationThrusters, "deltaX", -rotation);
+			SetFloatOnAnimatorList(_starboardRotationThrusters, "deltaX", rotation);
+		} 
+		else if(rotation == 0.0f)
+		{
+			SetFloatOnAnimatorList(_portRotationThrusters, "deltaX", 0);
+			SetFloatOnAnimatorList(_starboardRotationThrusters, "deltaX", 0);
+		}
+
+		// Set isStopped on all engines and thrusters
+		SetIsStoppedOnAllEnginesThrusters(_navMeshAgentMove.IsStopped);
+
 
 		// save position to previous position
 		_previousPosition = _navMeshAgentMove.Position;

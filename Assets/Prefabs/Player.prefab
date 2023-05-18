@@ -3507,7 +3507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 100
-  _rotationSpeed: 10
+  _rotationSpeed: 50
   _distanceToDestinationThreshold: 1
 --- !u!195 &8463468352833335039
 NavMeshAgent:
