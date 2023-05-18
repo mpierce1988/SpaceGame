@@ -16,8 +16,8 @@ public class NavMeshMovement
 
     public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
 	{
-		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.Speed * deltaTime;
-		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.Speed * deltaTime, NavMesh.AllAreas);
+		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.MaxSpeed * deltaTime;
+		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed * deltaTime, NavMesh.AllAreas);
 
 		
 		// Keep moving
@@ -44,7 +44,7 @@ public class NavMeshMovement
 			{
 				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 				Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-				return Quaternion.RotateTowards(_move.Rotation, targetRotation, _move.RotationSpeed * deltaTime);
+				return Quaternion.RotateTowards(_move.Rotation, targetRotation, _move.MaxRotationSpeed * deltaTime);
 			}
 		}
 
