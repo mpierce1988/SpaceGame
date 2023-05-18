@@ -71,10 +71,13 @@ public class Player : MonoBehaviour, INavMeshAgentMove
 	{
         if (isActive)
         {
+            Debug.Log("Activate Primary Received");
             _canRotate = true;
         }
         else
         {
+            Debug.Log("Deactivate Primary Received");
+            
             _canRotate = false;
         }
 	}	

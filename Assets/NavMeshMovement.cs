@@ -19,27 +19,20 @@ public class NavMeshMovement
 		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.Speed * deltaTime;
 		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.Speed * deltaTime, NavMesh.AllAreas);
 
-		// check if position is within distance threshold
-		if (!IsTargetDestinationCloseEnoughToStop(hit.position))
-		{
-			// Keep moving
-			_isStopped = false;
-			_nextPosition = hit.position;
-			return hit.position;
-		}
-		else
-		{
-			// stop
-			_isStopped = true;
-			_nextPosition = _move.Position;
-		}
+		
+		// Keep moving
+		
 
-		return _nextPosition;
+		_nextPosition = hit.position;
+		return hit.position;
+		
+		
 	}
 
 	public bool IsTargetDestinationCloseEnoughToStop(Vector2 targetDestionation)
 	{
-		return Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;
+		_isStopped = Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;
+		return IsStopped;
 	}
 
 	public Quaternion CalculateRotation(float deltaTime)
