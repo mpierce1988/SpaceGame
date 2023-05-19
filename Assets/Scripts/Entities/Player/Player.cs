@@ -78,8 +78,8 @@ namespace SpaceGame.Entities.Player
 		void FixedUpdate()
 		{
 			Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
-			_isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
-			_navMeshAgent.isStopped = IsStopped;
+			//_isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
+			//_navMeshAgent.isStopped = IsStopped;
 			_navMeshAgent.speed = MaxSpeed;
 			_navMeshAgent.angularSpeed = MaxRotationSpeed;
 			_navMeshAgent.acceleration = Acceleration;
