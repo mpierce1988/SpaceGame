@@ -35,20 +35,24 @@ public class NavMeshMovement
 		return IsStopped;
 	}
 
-	public Quaternion CalculateRotation(float deltaTime)
+	public float CalculateRotation(float deltaTime)
     {
-        if (_move.CanRotate)
-        {
-			Vector2 direction = _nextPosition - _move.Position;
-			if (direction.magnitude > 0.1f)
-			{
-				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-				Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-				return Quaternion.RotateTowards(_move.Rotation, targetRotation, _move.MaxRotationSpeed * deltaTime);
-			}
+		float rotationDirection = 0f;
+		if (_move.GameplayInput.IsRotateClockwiseDown && !_move.GameplayInput.IsRotateCounterclockwiseDown)
+		{
+			// rotate clockwise
+			// calculate the new rotation angle based on the MaxRotationSpeed and taking into consideration the fixedDeltaTime
+			rotationDirection = -1f;
+		}
+		else if (_move.GameplayInput.IsRotateCounterclockwiseDown && !_move.GameplayInput.IsRotateClockwiseDown)
+		{
+			// rotate counterclockwise
+			rotationDirection = 1f;
 		}
 
-        return _move.Rotation;
+		float rotationAmount = rotationDirection * _move.MaxRotationSpeed * Time.fixedDeltaTime;
+
+		return rotationAmount;
 	}
    
 }

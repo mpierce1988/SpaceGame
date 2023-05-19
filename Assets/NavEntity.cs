@@ -11,4 +11,5 @@ public abstract class NavEntity : MonoBehaviour, INavMeshAgentMove
 	public abstract bool CanRotate { get; }
 	public abstract float DistanceToDestinationThreshold { get; }
 	public abstract Vector2 InputVector { get; }
+	public abstract IGameplayInput GameplayInput { get; }
 }

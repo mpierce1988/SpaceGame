@@ -12,4 +12,5 @@ public interface INavMeshAgentMove
     bool IsStopped { get; }
     bool CanRotate { get; }
     float DistanceToDestinationThreshold { get; }
+    IGameplayInput GameplayInput { get; }
 }

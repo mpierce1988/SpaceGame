@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 100
   _rotationSpeed: 50
-  _distanceToDestinationThreshold: 1
+  _distanceToDestinationThreshold: 0.1
 --- !u!195 &8463468352833335039
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3864,7 +3864,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 6.57
-  m_Speed: 3.5
+  m_Speed: 100
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120

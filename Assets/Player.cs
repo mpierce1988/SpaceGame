@@ -43,6 +43,8 @@ public class Player : NavEntity
 
 	public override Vector2 InputVector => _inputVector;
 
+	public override IGameplayInput GameplayInput => _gameplayInput;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -73,27 +75,12 @@ public class Player : NavEntity
 		_navMeshAgent.speed = MaxSpeed;
 		_navMeshAgent.angularSpeed = MaxRotationSpeed;
 		_navMeshAgent.SetDestination(nextPosition);
-        /*if (!_navMeshAgent.isStopped)
-		{
-            _rigidBody2D.SetRotation(_movement.CalculateRotation(Time.fixedDeltaTime));
-        }*/
-        float rotationDirection = 0f;
-        if(_gameplayInput.IsRotateClockwiseDown && !_gameplayInput.IsRotateCounterclockwiseDown)
-        {
-            // rotate clockwise
-            // calculate the new rotation angle based on the MaxRotationSpeed and taking into consideration the fixedDeltaTime
-            rotationDirection = -1f;
-        } 
-        else if (_gameplayInput.IsRotateCounterclockwiseDown && !_gameplayInput.IsRotateClockwiseDown)
-        {
-            // rotate counterclockwise
-            rotationDirection = 1f;
-        }
-
-        float rotationAmount = rotationDirection * MaxRotationSpeed * Time.fixedDeltaTime;
+        
+        float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
 
         // apply the rotation to the rigidbody
-        _rigidBody2D.MoveRotation(_rigidBody2D.rotation + rotationAmount);
+        if(rotationAmount != 0.0) 
+            _rigidBody2D.MoveRotation(_rigidBody2D.rotation + rotationAmount);
 
         // update position and rotation and velocity
         _position = transform.position;
