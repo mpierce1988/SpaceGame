@@ -64,6 +64,24 @@ namespace SpaceGame.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate Counterclockwise"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb7f313f-1ce4-4e5b-bb23-22a4b7132af9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate Clockwise"",
+                    ""type"": ""Button"",
+                    ""id"": ""744721a3-60e1-405f-8f51-e663932e43d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +271,50 @@ namespace SpaceGame.Input
                     ""action"": ""Secondary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f7189cd-7f7c-4744-bbea-38caf70f7a5e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Counterclockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47fd7ea0-796c-4e8b-9fc1-111bdf3ad43a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Counterclockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6aee456-76a8-42e0-b601-f65ec46a0dca"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Clockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""628760be-6b95-4fdd-9a08-00eb317dda90"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Clockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -282,6 +344,8 @@ namespace SpaceGame.Input
             m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
             m_Gameplay_Primary = m_Gameplay.FindAction("Primary", throwIfNotFound: true);
             m_Gameplay_Secondary = m_Gameplay.FindAction("Secondary", throwIfNotFound: true);
+            m_Gameplay_RotateCounterclockwise = m_Gameplay.FindAction("Rotate Counterclockwise", throwIfNotFound: true);
+            m_Gameplay_RotateClockwise = m_Gameplay.FindAction("Rotate Clockwise", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -347,6 +411,8 @@ namespace SpaceGame.Input
         private readonly InputAction m_Gameplay_Look;
         private readonly InputAction m_Gameplay_Primary;
         private readonly InputAction m_Gameplay_Secondary;
+        private readonly InputAction m_Gameplay_RotateCounterclockwise;
+        private readonly InputAction m_Gameplay_RotateClockwise;
         public struct GameplayActions
         {
             private @GameplayInputActions m_Wrapper;
@@ -355,6 +421,8 @@ namespace SpaceGame.Input
             public InputAction @Look => m_Wrapper.m_Gameplay_Look;
             public InputAction @Primary => m_Wrapper.m_Gameplay_Primary;
             public InputAction @Secondary => m_Wrapper.m_Gameplay_Secondary;
+            public InputAction @RotateCounterclockwise => m_Wrapper.m_Gameplay_RotateCounterclockwise;
+            public InputAction @RotateClockwise => m_Wrapper.m_Gameplay_RotateClockwise;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -376,6 +444,12 @@ namespace SpaceGame.Input
                 @Secondary.started += instance.OnSecondary;
                 @Secondary.performed += instance.OnSecondary;
                 @Secondary.canceled += instance.OnSecondary;
+                @RotateCounterclockwise.started += instance.OnRotateCounterclockwise;
+                @RotateCounterclockwise.performed += instance.OnRotateCounterclockwise;
+                @RotateCounterclockwise.canceled += instance.OnRotateCounterclockwise;
+                @RotateClockwise.started += instance.OnRotateClockwise;
+                @RotateClockwise.performed += instance.OnRotateClockwise;
+                @RotateClockwise.canceled += instance.OnRotateClockwise;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -392,6 +466,12 @@ namespace SpaceGame.Input
                 @Secondary.started -= instance.OnSecondary;
                 @Secondary.performed -= instance.OnSecondary;
                 @Secondary.canceled -= instance.OnSecondary;
+                @RotateCounterclockwise.started -= instance.OnRotateCounterclockwise;
+                @RotateCounterclockwise.performed -= instance.OnRotateCounterclockwise;
+                @RotateCounterclockwise.canceled -= instance.OnRotateCounterclockwise;
+                @RotateClockwise.started -= instance.OnRotateClockwise;
+                @RotateClockwise.performed -= instance.OnRotateClockwise;
+                @RotateClockwise.canceled -= instance.OnRotateClockwise;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -424,6 +504,8 @@ namespace SpaceGame.Input
             void OnLook(InputAction.CallbackContext context);
             void OnPrimary(InputAction.CallbackContext context);
             void OnSecondary(InputAction.CallbackContext context);
+            void OnRotateCounterclockwise(InputAction.CallbackContext context);
+            void OnRotateClockwise(InputAction.CallbackContext context);
         }
     }
 }

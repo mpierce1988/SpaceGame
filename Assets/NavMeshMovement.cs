@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class NavMeshMovement
 {
     private INavMeshAgentMove _move;
-    private Vector2 _nextPosition;  
+    private Vector3 _previousPosition;  
     private bool _isStopped = false;
 
     public bool IsStopped => _isStopped;
@@ -16,39 +16,49 @@ public class NavMeshMovement
 
     public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
 	{
-		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.MaxSpeed * deltaTime;
-		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed * deltaTime, NavMesh.AllAreas);
+	Debug.Log("Input: " + input);
 
-		
+		var targetDestination = (Vector3)_move.Position + (new Vector3(input.x, input.y, 0) * _move.MaxSpeed);
+		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed, NavMesh.AllAreas);
+
+		var distanceBetweenTargetandCurrentPosition = Vector2.Distance(hit.position, _move.Position);
+		Debug.Log("Distance from target: " + distanceBetweenTargetandCurrentPosition);
 		// Keep moving
+
+		// Smooth destination
+		
+		Vector3 nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime / _move.TimeToStopSeconds);
 		
 
-		_nextPosition = hit.position;
-		return hit.position;
-		
+		_previousPosition = nextPosition;
+		return nextPosition;		
 		
 	}
 
 	public bool IsTargetDestinationCloseEnoughToStop(Vector2 targetDestionation)
 	{
-		_isStopped = Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;
+		_isStopped = Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;		
 		return IsStopped;
 	}
 
-	public Quaternion CalculateRotation(float deltaTime)
+	public float CalculateRotation(float deltaTime)
     {
-        if (_move.CanRotate)
-        {
-			Vector2 direction = _nextPosition - _move.Position;
-			if (direction.magnitude > 0.1f)
-			{
-				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-				Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-				return Quaternion.RotateTowards(_move.Rotation, targetRotation, _move.MaxRotationSpeed * deltaTime);
-			}
+		float rotationDirection = 0f;
+		if (_move.GameplayInput.IsRotateClockwiseDown && !_move.GameplayInput.IsRotateCounterclockwiseDown)
+		{
+			// rotate clockwise
+			// calculate the new rotation angle based on the MaxRotationSpeed and taking into consideration the fixedDeltaTime
+			rotationDirection = -1f;
+		}
+		else if (_move.GameplayInput.IsRotateCounterclockwiseDown && !_move.GameplayInput.IsRotateClockwiseDown)
+		{
+			// rotate counterclockwise
+			rotationDirection = 1f;
 		}
 
-        return _move.Rotation;
+		float rotationAmount = rotationDirection * _move.MaxRotationSpeed * Time.fixedDeltaTime;
+
+		return rotationAmount;
 	}
    
 }
