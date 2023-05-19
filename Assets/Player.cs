@@ -12,6 +12,8 @@ public class Player : NavEntity
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float _rotationSpeed = 0f;
     [SerializeField] private float _distanceToDestinationThreshold = 1.0f;
+    [SerializeField] private float _acceleration = 16f;
+    [SerializeField] private float _timeToStopSeconds = 1.0f;
 
     private NavMeshAgent _navMeshAgent;
     private IGameplayInput _gameplayInput;
@@ -45,6 +47,10 @@ public class Player : NavEntity
 
 	public override IGameplayInput GameplayInput => _gameplayInput;
 
+	public override float Acceleration => _acceleration;
+
+	public override float TimeToStopSeconds => _timeToStopSeconds;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -65,15 +71,14 @@ public class Player : NavEntity
 	
 
 	void FixedUpdate()
-    {
-        _navMeshAgent.speed = _speed;
+    {       
        
         Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
-
         _isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
         _navMeshAgent.isStopped = IsStopped;        
 		_navMeshAgent.speed = MaxSpeed;
 		_navMeshAgent.angularSpeed = MaxRotationSpeed;
+        _navMeshAgent.acceleration = Acceleration;
 		_navMeshAgent.SetDestination(nextPosition);
         
         float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
@@ -86,6 +91,24 @@ public class Player : NavEntity
         _position = transform.position;
         _rotation = transform.rotation;
         _velocity = _navMeshAgent.velocity;
+
+       Debug.Log("Current Speed: " + _navMeshAgent.velocity.magnitude);
+	}
+
+	void OnDrawGizmos()
+	{
+		if (_navMeshAgent != null && _navMeshAgent.hasPath)
+		{
+			Gizmos.color = Color.red;
+			var previousCorner = _navMeshAgent.path.corners[0];
+
+			for (int i = 1; i < _navMeshAgent.path.corners.Length; i++)
+			{
+				var currentCorner = _navMeshAgent.path.corners[i];
+				Gizmos.DrawLine(previousCorner, currentCorner);
+				previousCorner = currentCorner;
+			}
+		}
 	}
 
 	void OnDestroy()

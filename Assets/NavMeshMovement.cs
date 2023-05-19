@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class NavMeshMovement
 {
     private INavMeshAgentMove _move;
-    private Vector2 _nextPosition;  
+    private Vector3 _previousPosition;  
     private bool _isStopped = false;
 
     public bool IsStopped => _isStopped;
@@ -16,22 +16,28 @@ public class NavMeshMovement
 
     public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
 	{
-		var targetDestination = _move.Position + new Vector2(input.x, input.y) * _move.MaxSpeed * deltaTime;
-		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed * deltaTime, NavMesh.AllAreas);
+	Debug.Log("Input: " + input);
 
-		
+		var targetDestination = (Vector3)_move.Position + (new Vector3(input.x, input.y, 0) * _move.MaxSpeed);
+		NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed, NavMesh.AllAreas);
+
+		var distanceBetweenTargetandCurrentPosition = Vector2.Distance(hit.position, _move.Position);
+		Debug.Log("Distance from target: " + distanceBetweenTargetandCurrentPosition);
 		// Keep moving
+
+		// Smooth destination
+		
+		Vector3 nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime / _move.TimeToStopSeconds);
 		
 
-		_nextPosition = hit.position;
-		return hit.position;
-		
+		_previousPosition = nextPosition;
+		return nextPosition;		
 		
 	}
 
 	public bool IsTargetDestinationCloseEnoughToStop(Vector2 targetDestionation)
 	{
-		_isStopped = Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;
+		_isStopped = Vector2.Distance(targetDestionation, _move.Position) <= _move.DistanceToDestinationThreshold;		
 		return IsStopped;
 	}
 
