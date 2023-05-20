@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-namespace SpaceGame
+namespace SpaceGame.Pooling
 {
 	public class ReturnToPool : MonoBehaviour
 	{

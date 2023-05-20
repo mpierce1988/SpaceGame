@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SpaceGame
+namespace SpaceGame.Weapons
 {
     [RequireComponent(typeof(BaseWeapon))]
     public class WeaponAnimationEvents : MonoBehaviour
