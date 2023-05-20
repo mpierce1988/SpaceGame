@@ -8,6 +8,7 @@ namespace SpaceGame.Entities.NavEntity
 		private INavMeshAgentMove _move;
 		private Vector3 _previousPosition;
 		private bool _isStopped = false;
+		private float _currentSpeed = 0f;
 
 		private float _maxSlowdownRate = 2f;
 
@@ -16,42 +17,29 @@ namespace SpaceGame.Entities.NavEntity
 		public NavMeshMover(INavMeshAgentMove move)
 		{
 			_move = move;
+			_currentSpeed = _move.MaxSpeed;
 		}
 
 		public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
 		{
-			
 
-			var targetDestination = (Vector3)_move.Position + (new Vector3(input.x, input.y, 0) * _move.MaxSpeed);
-			NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed, NavMesh.AllAreas);
-
-
-			// Keep moving
-			Vector3 nextPosition = Vector3.zero;
-			/*if(_move.InputVector.magnitude < 0.1f)
+			// If there's input, accelerate up to max speed
+			if (input.magnitude >= 0.1f)
 			{
-				// calculate drifting
-				// Smooth destination
-				// 1. Calculate the distance between the current position and the target position
-				var distanceBetweenTargetandCurrentPosition = Vector2.Distance(hit.position, _move.Position);
-				// 2. Calculate the time it will take to reach the target position
-				var timeToReachTargetPosition = distanceBetweenTargetandCurrentPosition / _maxSlowdownRate;
-				Debug.Log("Distance Between Target and Current Position: " + distanceBetweenTargetandCurrentPosition);
-				Debug.Log("Time to Reach Target Position: " + timeToReachTargetPosition);
-				nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime / timeToReachTargetPosition);
+				_currentSpeed = Mathf.Min(_move.MaxSpeed, _currentSpeed + _move.AccelerationUnitsPerSecond * deltaTime);
 			}
+			// If there's no input, decelerate down to zero speed
 			else
 			{
-				// calculate next position according to max speed
-				nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime / _move.TimeToStopSeconds);
-			}*/
+				_currentSpeed = Mathf.Max(0, _currentSpeed - _move.SlowDownUnitsPerSecond * deltaTime);
+			}
 
-			var distanceBetweenTargetandCurrentPosition = Vector2.Distance(hit.position, _move.Position);
-			// calculate next position according to max speed
-			nextPosition = Vector3.Lerp(_previousPosition, hit.position, (1 / deltaTime) * (_move.TimeToStopSeconds * distanceBetweenTargetandCurrentPosition));
+			var targetDestination = (Vector3)_move.Position + (new Vector3(input.x, input.y, 0) * _currentSpeed);
+			NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _currentSpeed, NavMesh.AllAreas);
 
-
+			Vector3 nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime);
 			_previousPosition = nextPosition;
+
 			return nextPosition;
 
 		}

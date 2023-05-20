@@ -1024,7 +1024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _timeToStopSeconds
-      value: 0.6
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: _accelerationUnitsPerSecond
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _distanceToDestinationThreshold
@@ -1037,6 +1041,10 @@ PrefabInstance:
     - target: {fileID: 4892383682429074002, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929449700088316933, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5013544107810988256, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Layer
@@ -7652,7 +7660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8900723742359615267, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Layer

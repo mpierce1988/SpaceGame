@@ -17,7 +17,7 @@ namespace SpaceGame.Entities.Player
 		[SerializeField] private float _speed = 3.5f;
 		[SerializeField] private float _rotationSpeed = 0f;
 		[SerializeField] private float _distanceToDestinationThreshold = 1.0f;
-		[SerializeField] private float _acceleration = 16f;
+		[SerializeField] private float _accelerationUnitsPerSecond = 16f;
 		[SerializeField] private float _timeToStopSeconds = 1.0f;
 
 		private NavMeshAgent _navMeshAgent;
@@ -52,9 +52,11 @@ namespace SpaceGame.Entities.Player
 
 		public override IGameplayInput GameplayInput => _gameplayInput;
 
-		public override float Acceleration => _acceleration;
+		//public override float Acceleration => _accelerationUnitsPerSecond;
 
-		public override float TimeToStopSeconds => _timeToStopSeconds;
+		public override float SlowDownUnitsPerSecond => _timeToStopSeconds;
+
+		public override float AccelerationUnitsPerSecond => _accelerationUnitsPerSecond;
 
 		// Start is called before the first frame update
 		void Start()
@@ -82,7 +84,7 @@ namespace SpaceGame.Entities.Player
 			//_navMeshAgent.isStopped = IsStopped;
 			_navMeshAgent.speed = MaxSpeed;
 			_navMeshAgent.angularSpeed = MaxRotationSpeed;
-			_navMeshAgent.acceleration = Acceleration;
+			_navMeshAgent.acceleration = AccelerationUnitsPerSecond;
 			_navMeshAgent.SetDestination(nextPosition);
 
 			float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);

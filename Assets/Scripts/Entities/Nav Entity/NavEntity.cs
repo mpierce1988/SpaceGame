@@ -14,9 +14,9 @@ namespace SpaceGame.Entities.NavEntity
 		public abstract bool CanRotate { get; }
 		public abstract float DistanceToDestinationThreshold { get; }
 		public abstract Vector2 InputVector { get; }
-		public abstract IGameplayInput GameplayInput { get; }
-		public abstract float Acceleration { get; }
-		public abstract float TimeToStopSeconds { get; }
+		public abstract IGameplayInput GameplayInput { get; }		
+		public abstract float SlowDownUnitsPerSecond { get; }
+		public abstract float AccelerationUnitsPerSecond { get; }
 	}
 }
 
