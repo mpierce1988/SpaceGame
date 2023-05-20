@@ -65,6 +65,7 @@ namespace SpaceGame.Entities.Player
 		void Start()
 		{
 			_navMeshAgent = GetComponent<NavMeshAgent>();
+			_navMeshAgent.updatePosition = false;
 			_navMeshAgent.updateRotation = false;
 			_navMeshAgent.updateUpAxis = false;
 
@@ -89,6 +90,7 @@ namespace SpaceGame.Entities.Player
 			_navMeshAgent.angularSpeed = MaxRotationSpeed;
 			_navMeshAgent.acceleration = _movement.CalculateAccelerationUnits(_inputVector, Time.fixedDeltaTime);
 			_navMeshAgent.SetDestination(nextPosition);
+			_rigidBody2D.MovePosition(_navMeshAgent.nextPosition);
 
 			float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
 

@@ -104,12 +104,12 @@ namespace SpaceGame.Entities.NavEntity
 
 		private Vector3 CalculateNextPositionBasedOnSpeed(Vector2 input, float currentSpeed, float deltaTime)
 		{
-			Vector3 targetDisplacement = new Vector3(input.x, input.y, 0) * _move.MaxSpeed;
+			Vector3 targetDisplacement = new Vector3(input.x, input.y, 0) * currentSpeed;
 			var targetDestination = (Vector3)_move.Position + targetDisplacement;
-			NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, currentSpeed, NavMesh.AllAreas);
+			NavMesh.SamplePosition(targetDestination, out NavMeshHit hit, _move.MaxSpeed, NavMesh.AllAreas);
 
-			Vector3 nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime);
-			//Vector3 nextPosition = hit.position;
+			//Vector3 nextPosition = Vector3.Lerp(_previousPosition, hit.position, deltaTime);
+			Vector3 nextPosition = hit.position;
 
 			return nextPosition;
 		}

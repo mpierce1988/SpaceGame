@@ -3857,7 +3857,8 @@ MonoBehaviour:
   _speed: 100
   _rotationSpeed: 50
   _distanceToDestinationThreshold: 0.1
-  _acceleration: 16
+  _longAccelerationUnitsPerSecond: 16
+  _lateralAccelerationUnitsPerSecond: 4
   _timeToStopSeconds: 1
 --- !u!195 &8463468352833335039
 NavMeshAgent:
