@@ -6,7 +6,7 @@ namespace SpaceGame.Entities.NavEntity
 	public class NavMeshMover
 	{
 		private INavMeshAgentMove _move;
-		private Vector3 _previousPosition;
+		
 		private bool _isStopped = false;
 		private float _currentSpeed = 0f;
 		private float _lastTopSpeed = 0f;
@@ -21,14 +21,12 @@ namespace SpaceGame.Entities.NavEntity
 			_currentSpeed = _move.MaxSpeed;
 		}
 
-		public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
+		public Vector3 CalculateNextDestination(Vector2 input, float deltaTime)
 		{
 			float accelerationUnitsPerSecond = CalculateAccelerationUnits(input, deltaTime);
 			_currentSpeed = AdjustSpeedBasedOnInput(input, _currentSpeed, accelerationUnitsPerSecond, deltaTime);
-			var nextPosition = CalculateNextPositionBasedOnSpeed(input, _currentSpeed, deltaTime);
-
-			_previousPosition = nextPosition;
-			return nextPosition;
+			var nextDestination = CalculateNextPositionBasedOnSpeed(input, _currentSpeed, deltaTime);			
+			return nextDestination;
 		}
 
 		public bool IsTargetDestinationCloseEnoughToStop(Vector2 targetDestionation)

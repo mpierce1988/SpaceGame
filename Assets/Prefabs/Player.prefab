@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6022939524217336446}
   - component: {fileID: 564834357654691788}
   - component: {fileID: 2036047876207686178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6873905599108142716}
   - component: {fileID: 8831437809457811067}
   - component: {fileID: 7464804462197711266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Engine 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 122791248448500746}
   - component: {fileID: 8017922106354169634}
   - component: {fileID: 8022092615782974106}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wings_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460627638333387939}
   - component: {fileID: 2866465068785554321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_5_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6218462140883580898}
   - component: {fileID: 3660563867067464550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_5_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 900117070772755946}
   - component: {fileID: 1212328474435751233}
   - component: {fileID: 3374251318339655385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thruster 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 7718399393790791160}
   - component: {fileID: 8003272010846493956}
   - component: {fileID: 511353277050750831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cabin_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7098317494329729380}
   - component: {fileID: 5896042595012218403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_4_000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 2853191844218262148}
   - component: {fileID: 7755994630762474391}
   - component: {fileID: 7854945143993769515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thruster 01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1381,7 @@ GameObject:
   - component: {fileID: 9214207084178922818}
   - component: {fileID: 4858557651859938438}
   - component: {fileID: 2550863065779381121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1524,7 @@ GameObject:
   - component: {fileID: 6739041935380372419}
   - component: {fileID: 4082379806000037593}
   - component: {fileID: 2453215547862840540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2609698652228538836}
   - component: {fileID: 2359319631389340753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1769,7 +1769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7466458039011280846}
   - component: {fileID: 4235351548763067698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_4_000 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1855,7 +1855,7 @@ GameObject:
   - component: {fileID: 636644104407109954}
   - component: {fileID: 6931540238860356082}
   - component: {fileID: 8658538595229322921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Engine 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5214186311766851893}
   - component: {fileID: 5344476142684850012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_5_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2108,7 +2108,7 @@ GameObject:
   - component: {fileID: 4759615489285984957}
   - component: {fileID: 8463468352833335039}
   - component: {fileID: 4929449700088316933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3854,12 +3854,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61a5309a1cf6c14a9d154a52b06e836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  _speed: 40
   _rotationSpeed: 50
-  _distanceToDestinationThreshold: 0.1
-  _longAccelerationUnitsPerSecond: 16
+  _distanceToDestinationThreshold: 0.001
+  _longAccelerationUnitsPerSecond: 24
   _lateralAccelerationUnitsPerSecond: 4
-  _timeToStopSeconds: 1
+  _timeToStopSeconds: 0.25
 --- !u!195 &8463468352833335039
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3870,11 +3870,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 6.57
-  m_Speed: 100
-  m_Acceleration: 20
+  m_Speed: 50
+  m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -3909,7 +3909,7 @@ GameObject:
   - component: {fileID: 2545628276372384554}
   - component: {fileID: 5706745141997837319}
   - component: {fileID: 2883242144544178085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thruster 01 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4074,7 +4074,7 @@ GameObject:
   - component: {fileID: 4640887571836467239}
   - component: {fileID: 2397002897569753050}
   - component: {fileID: 456346714639958854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thruster 01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4237,7 +4237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 479114920787808395}
   - component: {fileID: 6165458399098699003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_4_000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4322,7 +4322,7 @@ GameObject:
   - component: {fileID: 7244069771082078508}
   - component: {fileID: 4083980759733540498}
   - component: {fileID: 5838454762705031129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_4 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4463,7 +4463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8194442716200954057}
   - component: {fileID: 3767320243341507234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_6_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4547,7 +4547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462140084126294090}
   - component: {fileID: 8240856721147885692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exhaust_5_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4632,7 +4632,7 @@ GameObject:
   - component: {fileID: 962166844703049231}
   - component: {fileID: 1884409340030045677}
   - component: {fileID: 3839226451179957407}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4774,7 +4774,7 @@ GameObject:
   - component: {fileID: 4354935374720463995}
   - component: {fileID: 578926588742003142}
   - component: {fileID: 4081191063322286370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Engine_4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4985,6 +4985,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2609698652228538836}
     m_Modifications:
+    - target: {fileID: 1851962222086493203, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972481918194517687, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196208959430981403, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2734933920907615081, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -5029,9 +5041,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3940180933137803193, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971554330429315815, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859511701321488261, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5038890546828056103, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5714144111738948832, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
       propertyPath: m_Name
       value: Port_Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714144111738948832, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652425831782524190, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687136427960317888, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038987354532193068, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264625423104863695, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ae3a9bc0ad8e4f428779be19c86aad9, type: 3}

@@ -79,29 +79,12 @@ namespace SpaceGame.Entities.Player
 			_gameplayInput.OnPrimaryChange += _gameplayInput_OnPrimaryChange;
 		}
 
-
-
 		void FixedUpdate()
 		{
-			Vector2 nextPosition = _movement.CalculateNextPosition(_inputVector, Time.fixedDeltaTime);
-			//_isStopped = _movement.IsTargetDestinationCloseEnoughToStop(nextPosition);
-			//_navMeshAgent.isStopped = IsStopped;
-			_navMeshAgent.speed = MaxSpeed;
-			_navMeshAgent.angularSpeed = MaxRotationSpeed;
-			_navMeshAgent.acceleration = _movement.CalculateAccelerationUnits(_inputVector, Time.fixedDeltaTime);
-			_navMeshAgent.SetDestination(nextPosition);
-			_rigidBody2D.MovePosition(_navMeshAgent.nextPosition);
-
-			float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
-
-			// apply the rotation to the rigidbody
-			if (rotationAmount != 0.0)
-				_rigidBody2D.MoveRotation(_rigidBody2D.rotation + rotationAmount);
-
-			// update position and rotation and velocity
-			_position = transform.position;
-			_rotation = transform.rotation;
-			_velocity = _navMeshAgent.velocity;
+			SetSpeedAndAcceleration();
+			SetDestinationAndNextPosition();
+			SetRotation();
+			UpdateSavedPositionRotationVelocity();
 		}
 
 		void OnDrawGizmos()
@@ -144,6 +127,37 @@ namespace SpaceGame.Entities.Player
 		private void _gameplayInput_OnMovementChange(Vector2 inputVector)
 		{
 			_inputVector = inputVector;
+		}
+
+		private void UpdateSavedPositionRotationVelocity()
+		{
+			// update position and rotation and velocity
+			_position = transform.position;
+			_rotation = transform.rotation;
+			_velocity = _navMeshAgent.velocity;
+		}
+
+		private void SetRotation()
+		{
+			float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
+
+			// apply the rotation to the rigidbody
+			if (rotationAmount != 0.0)
+				_rigidBody2D.MoveRotation(_rigidBody2D.rotation + rotationAmount);
+		}
+
+		private void SetDestinationAndNextPosition()
+		{
+			Vector2 nextPosition = _movement.CalculateNextDestination(_inputVector, Time.fixedDeltaTime);
+			_navMeshAgent.SetDestination(nextPosition);
+			_rigidBody2D.MovePosition(_navMeshAgent.nextPosition);
+		}
+
+		private void SetSpeedAndAcceleration()
+		{
+			_navMeshAgent.speed = MaxSpeed;
+			_navMeshAgent.angularSpeed = MaxRotationSpeed;
+			_navMeshAgent.acceleration = _movement.CalculateAccelerationUnits(_inputVector, Time.fixedDeltaTime);
 		}
 	}
 }
