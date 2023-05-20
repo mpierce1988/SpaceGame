@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SpaceGame
+namespace SpaceGame.Pooling
 {
     [System.Serializable]
 	public class PooledObject
