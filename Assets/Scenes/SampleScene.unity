@@ -1023,8 +1023,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: _speed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _timeToStopSeconds
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _accelerationUnitsPerSecond
@@ -1032,7 +1036,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: _distanceToDestinationThreshold
-      value: 1
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: _longAccelerationUnitsPerSecond
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759615489285984957, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
+      propertyPath: _lateralAccelerationUnitsPerSecond
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4780187515431634700, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Layer
@@ -7652,7 +7664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_AutoBraking
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Acceleration
@@ -7660,7 +7672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463468352833335039, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_StoppingDistance
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8900723742359615267, guid: 928e4c7a307e1fa41bfc17b2c440c52b, type: 3}
       propertyPath: m_Layer

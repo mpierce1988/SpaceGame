@@ -87,7 +87,7 @@ namespace SpaceGame.Entities.Player
 			//_navMeshAgent.isStopped = IsStopped;
 			_navMeshAgent.speed = MaxSpeed;
 			_navMeshAgent.angularSpeed = MaxRotationSpeed;
-			_navMeshAgent.acceleration = LongAccelerationUnitsPerSecond;
+			_navMeshAgent.acceleration = _movement.CalculateAccelerationUnits(_inputVector, Time.fixedDeltaTime);
 			_navMeshAgent.SetDestination(nextPosition);
 
 			float rotationAmount = _movement.CalculateRotation(Time.fixedDeltaTime);
