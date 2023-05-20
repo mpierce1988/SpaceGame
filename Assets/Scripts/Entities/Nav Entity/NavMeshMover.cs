@@ -22,11 +22,29 @@ namespace SpaceGame.Entities.NavEntity
 
 		public Vector3 CalculateNextPosition(Vector2 input, float deltaTime)
 		{
+			// Define different accelerations for longitudinal (front/back) and lateral (side to side) movement
+			float longAcc = _move.LongAccelerationUnitsPerSecond;  // Greater acceleration for front/back movement
+			float latAcc = _move.LateralAccelerationUnitsPerSecond;
 
 			// If there's input, accelerate up to max speed
 			if (input.magnitude >= 0.1f)
 			{
-				_currentSpeed = Mathf.Min(_move.MaxSpeed, _currentSpeed + _move.AccelerationUnitsPerSecond * deltaTime);
+				// Normalize input direction
+				Vector2 inputDir = input.normalized;
+
+				// Forward direction of the ship
+				Vector2 forwardDir = (Vector2)(_move.Rotation * Vector3.up); // Assuming up is forward for the ship
+
+				// Calculate dot product between input direction and forward direction
+				float dotProduct = Vector2.Dot(inputDir, forwardDir);
+
+				// Convert dot product into a range from 0 to 1
+				float blend = (dotProduct + 1) / 2;
+
+				// Interpolate between latAcc and longAcc based on blend factor
+				float accelerationUnitsPerSecond = Mathf.Lerp(latAcc, longAcc, blend);
+
+				_currentSpeed = Mathf.Min(_move.MaxSpeed, _currentSpeed + accelerationUnitsPerSecond * deltaTime);
 			}
 			// If there's no input, decelerate down to zero speed
 			else

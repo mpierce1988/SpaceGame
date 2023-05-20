@@ -9,7 +9,8 @@ namespace SpaceGame.Entities.NavEntity
 		Vector3 CurrentVelocity { get; }
 		float MaxRotationSpeed { get; }
 		float SlowDownUnitsPerSecond { get; }
-		float AccelerationUnitsPerSecond { get; }
+		float LongAccelerationUnitsPerSecond { get; }
+		float LateralAccelerationUnitsPerSecond { get; }
 		Vector2 Position { get; }
 		Vector2 InputVector { get; }
 		Quaternion Rotation { get; }

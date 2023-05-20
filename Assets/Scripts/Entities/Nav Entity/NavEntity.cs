@@ -16,7 +16,8 @@ namespace SpaceGame.Entities.NavEntity
 		public abstract Vector2 InputVector { get; }
 		public abstract IGameplayInput GameplayInput { get; }		
 		public abstract float SlowDownUnitsPerSecond { get; }
-		public abstract float AccelerationUnitsPerSecond { get; }
+		public abstract float LongAccelerationUnitsPerSecond { get; }
+		public abstract float LateralAccelerationUnitsPerSecond { get; }
 	}
 }
 
