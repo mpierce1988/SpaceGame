@@ -96,7 +96,7 @@ namespace SpaceGame.Entities.NavEntity
 				adjustedSpeed = Mathf.Max(0, currentSpeed - deceleration * deltaTime);
 			}
 			_currentSpeed = adjustedSpeed;
-			Debug.Log("Adjusted Speed: " + adjustedSpeed);
+			//Debug.Log("Adjusted Speed: " + adjustedSpeed);
 			return adjustedSpeed;
 		}
 

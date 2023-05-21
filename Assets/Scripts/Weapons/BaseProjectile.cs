@@ -10,6 +10,7 @@ namespace SpaceGame.Weapons
         [SerializeField] private float _speed = 1f;
         [SerializeField] private int _damage = 1;
         [SerializeField] private float _timeBeforeDestroyed = 1f;
+        [SerializeField] private LayerMask _targetLayerMask;
         private float _timeSinceSpawn = 0f;
 
         private ReturnToPool _returnToPool;
@@ -20,6 +21,8 @@ namespace SpaceGame.Weapons
 		public float TimeBeforeDestroyed => _timeBeforeDestroyed;
 
 		public float TimeSinceSpawn => _timeSinceSpawn;
+
+        public LayerMask TargetLayerMask => _targetLayerMask;
 
 		private void Awake()
 		{
