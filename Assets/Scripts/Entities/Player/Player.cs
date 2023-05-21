@@ -131,10 +131,11 @@ namespace SpaceGame.Entities.Player
 
 		private void UpdateSavedPositionRotationVelocity()
 		{
+			Vector2 differenceVector = (Vector2)transform.position - _position;
 			// update position and rotation and velocity
 			_position = transform.position;
 			_rotation = transform.rotation;
-			_velocity = _navMeshAgent.velocity;
+			_velocity = differenceVector;
 		}
 
 		private void SetRotation()
