@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using SpaceGame.Pooling;
+using System;
 
 namespace SpaceGame.Weapons
 {
@@ -15,7 +16,11 @@ namespace SpaceGame.Weapons
 
         private ReturnToPool _returnToPool;
 
-        public float Speed => _speed;
+		public event Action OnProjectileFired;
+		public event Action OnProjectileDestroyed;
+		public event Action OnProjectileRemoved;
+
+		public float Speed => _speed;
         public int Damage => _damage;
 
 		public float TimeBeforeDestroyed => _timeBeforeDestroyed;
@@ -58,10 +63,20 @@ namespace SpaceGame.Weapons
 		public void Launch(Vector2 direction)
         {
             _rb.AddForce(direction * Speed);
+            OnProjectileFired?.Invoke();
         }
 
 		public void Destroy()
 		{
+            if(_timeSinceSpawn >= _timeBeforeDestroyed)
+            {
+                OnProjectileRemoved?.Invoke();
+            }
+            else
+            {
+                OnProjectileDestroyed?.Invoke();
+            }
+
             _timeSinceSpawn = 0;
             if(_returnToPool != null)
             {

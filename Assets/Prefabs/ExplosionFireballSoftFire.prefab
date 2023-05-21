@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7874161299765271295}
   - component: {fileID: 8040754714171466457}
   - component: {fileID: 8040426059783581109}
+  - component: {fileID: 5779674441585391776}
   m_Layer: 0
   m_Name: ExplosionFireballSoftFire
   m_TagString: Untagged
@@ -4798,8 +4799,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 90961469
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4831,6 +4832,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5779674441585391776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7877799267156797469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad6b2c793748e5448f01bcff1e19b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeBeforeDestroyed: 1
 --- !u!1 &7877906143710574843
 GameObject:
   m_ObjectHideFlags: 0

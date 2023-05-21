@@ -8,5 +8,6 @@ namespace SpaceGame.Pooling
         public string Key;
         public GameObject ObjectPrefab;
         public int DefaultSpawnAmount;
+        public Vector3 DefaultScale = Vector3.one;
     }
 }

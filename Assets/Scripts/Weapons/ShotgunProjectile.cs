@@ -14,30 +14,21 @@ namespace SpaceGame.Weapons
 			if (damageable != null)
 			{
 				// check if collision gameObject layer is in the targetLayerMask list
-				Debug.Log("Projectile collided with IDamageable named " + collision.gameObject.name);
+				//Debug.Log("Projectile collided with IDamageable named " + collision.gameObject.name);
 				if ((TargetLayerMask & (1 << collision.gameObject.layer)) != 0)
 				{
 					damageable.TakeDamage(Damage);
 				}				
 			}
 
-			// Destroy this projectile
-			ReturnToPool returnToPool = this.GetComponent<ReturnToPool>();
-
+			
 			if(!this.gameObject.activeInHierarchy)
 			{
 				// this projectile has already been returned to the pool
 				return;
 			}
 
-			if(returnToPool != null)
-			{
-				returnToPool.Return();
-			} 
-			else
-			{
-				Destroy(this.gameObject);
-			}
+			base.Destroy();
 		}
 	}
 }

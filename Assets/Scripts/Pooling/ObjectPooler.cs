@@ -8,9 +8,11 @@ namespace SpaceGame.Pooling
 {
 	public class ObjectPooler : MonoBehaviour
     {
-        [SerializeField] protected PooledObject ObjectToPool;
+        [SerializeField] protected PooledObject _pooledObject;
 
         private ObjectPool<GameObject> _pool;
+
+		public PooledObject PooledObject => _pooledObject;
 
 		private void Awake()
 		{
@@ -18,7 +20,7 @@ namespace SpaceGame.Pooling
 
 			List<GameObject> list = new List<GameObject>();
 			// instantiate initial items
-			for(int i = 0; i < ObjectToPool.DefaultSpawnAmount; i++)
+			for(int i = 0; i < _pooledObject.DefaultSpawnAmount; i++)
 			{
 				GameObject itemToSpawn = _pool.Get();
 				list.Add(itemToSpawn);
@@ -44,6 +46,7 @@ namespace SpaceGame.Pooling
 			return (GameObject objectFromPool) =>
 			{
 				objectFromPool.transform.parent = null;
+				objectFromPool.transform.localScale = _pooledObject.DefaultScale;
 				objectFromPool.SetActive(true);
 			};
 		}
@@ -52,7 +55,7 @@ namespace SpaceGame.Pooling
 		{
 			return () =>
 			{
-				GameObject objectToSpawn = Instantiate(ObjectToPool.ObjectPrefab);
+				GameObject objectToSpawn = Instantiate(_pooledObject.ObjectPrefab);
 				objectToSpawn.AddComponent<ReturnToPool>().SetPool(_pool);
 				objectToSpawn.transform.parent = this.transform;
 				return objectToSpawn;
